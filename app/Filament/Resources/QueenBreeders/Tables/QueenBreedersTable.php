@@ -76,5 +76,5 @@ class QueenBreedersTable
                     RestoreBulkAction::make(),
                 ]),
             ]);
-    }
+    } 
 }

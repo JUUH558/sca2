@@ -19,5 +19,5 @@ class EditInseminator extends EditRecord
             ForceDeleteAction::make(),
             RestoreAction::make(),
         ];
-    }
+    } 
 }

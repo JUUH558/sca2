@@ -37,5 +37,5 @@ class PedigreeQueenForm
                 TextInput::make('umiestnenie'),
                 TextInput::make('poznamka'),
             ]);
-    }
+    } 
 }

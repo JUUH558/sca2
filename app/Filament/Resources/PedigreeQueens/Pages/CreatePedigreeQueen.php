@@ -8,4 +8,4 @@ use Filament\Resources\Pages\CreateRecord;
 class CreatePedigreeQueen extends CreateRecord
 {
     protected static string $resource = PedigreeQueenResource::class;
-}
+} 

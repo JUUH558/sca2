@@ -38,3 +38,4 @@ class PedigreeQueen extends Model
 
     // Tu by mala byť relácia na Queen (Matka)
 }
+

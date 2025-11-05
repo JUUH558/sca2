@@ -32,7 +32,7 @@ class LineResource extends Resource
     public static function table(Table $table): Table
     {
         return LinesTable::configure($table);
-    }
+    } 
 
     public static function getRelations(): array
     {

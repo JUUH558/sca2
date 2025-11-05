@@ -19,5 +19,5 @@ class EditPedigreeQueen extends EditRecord
             ForceDeleteAction::make(),
             RestoreAction::make(),
         ];
-    }
+    } 
 }

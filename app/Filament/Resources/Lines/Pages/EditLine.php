@@ -19,5 +19,5 @@ class EditLine extends EditRecord
             ForceDeleteAction::make(),
             RestoreAction::make(),
         ];
-    }
+    } 
 }

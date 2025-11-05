@@ -15,5 +15,5 @@ class ListLines extends ListRecords
         return [
             CreateAction::make(),
         ];
-    }
+    } 
 }

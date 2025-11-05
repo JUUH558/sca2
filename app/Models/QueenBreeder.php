@@ -55,6 +55,7 @@ class QueenBreeder extends Authenticatable
         // 'podpis' => 'string', // binárne dáta
     ];
 
+
     // Kvôli slovenskému názvu stĺpca (defaultne je 'email')
     public function getAuthIdentifierName()
     {
@@ -67,6 +68,7 @@ class QueenBreeder extends Authenticatable
         return $this->password;
     }
 }
+
 
 
 

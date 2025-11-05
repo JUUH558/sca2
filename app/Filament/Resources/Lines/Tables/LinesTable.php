@@ -52,5 +52,5 @@ class LinesTable
                     RestoreBulkAction::make(),
                 ]),
             ]);
-    }
+    } 
 }

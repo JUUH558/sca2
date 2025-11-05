@@ -15,5 +15,5 @@ class ListQueenBreeders extends ListRecords
         return [
             CreateAction::make(),
         ];
-    }
+    } 
 }

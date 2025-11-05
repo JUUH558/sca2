@@ -15,5 +15,5 @@ class ListInseminators extends ListRecords
         return [
             CreateAction::make(),
         ];
-    }
+    } 
 }

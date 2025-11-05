@@ -19,5 +19,5 @@ class EditQueenBreeder extends EditRecord
             ForceDeleteAction::make(),
             RestoreAction::make(),
         ];
-    }
+    } 
 }

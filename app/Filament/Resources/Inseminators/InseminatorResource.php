@@ -32,7 +32,7 @@ class InseminatorResource extends Resource
     public static function table(Table $table): Table
     {
         return InseminatorsTable::configure($table);
-    }
+    } 
 
     public static function getRelations(): array
     {

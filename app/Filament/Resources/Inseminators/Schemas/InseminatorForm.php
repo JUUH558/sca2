@@ -21,5 +21,5 @@ class InseminatorForm
                 TextInput::make('telefon')
                     ->tel(),
             ]);
-    }
+    } 
 }

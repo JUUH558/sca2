@@ -15,5 +15,5 @@ class ListPedigreeQueens extends ListRecords
         return [
             CreateAction::make(),
         ];
-    }
+    } 
 }

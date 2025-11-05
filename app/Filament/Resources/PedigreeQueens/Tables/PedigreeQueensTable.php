@@ -75,6 +75,7 @@ class PedigreeQueensTable
                     DeleteBulkAction::make(),
                     ForceDeleteBulkAction::make(),
                     RestoreBulkAction::make(),
+                    
                 ]),
             ]);
     }

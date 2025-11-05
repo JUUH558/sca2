@@ -39,7 +39,7 @@ class PedigreeQueenResource extends Resource
         return [
             //
         ];
-    }
+    } 
 
     public static function getPages(): array
     {

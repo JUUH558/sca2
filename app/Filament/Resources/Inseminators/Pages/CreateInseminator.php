@@ -8,4 +8,4 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateInseminator extends CreateRecord
 {
     protected static string $resource = InseminatorResource::class;
-}
+} 

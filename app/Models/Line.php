@@ -30,3 +30,4 @@ class Line extends Model
     }
     // Tu sa pridávajú ďalšie relácie (napr. s Queen, ak by bola relácia namiesto varchar v tabuľke queens)
 }
+

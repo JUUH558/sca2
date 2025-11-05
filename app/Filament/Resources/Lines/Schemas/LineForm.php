@@ -21,5 +21,5 @@ class LineForm
                     ->required()
                     ->numeric(),
             ]);
-    }
+    } 
 }
