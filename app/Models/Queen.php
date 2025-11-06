@@ -42,6 +42,11 @@ class Queen extends Model
         return $this->belongsTo(Breeder::class, 'chovatel_id');
     }
  */
+
+    protected $hidden=[
+        'qrcode',
+        ];
+
     public function serie(): BelongsTo
     {
         return $this->belongsTo(Serie::class, 'seria', 'id')

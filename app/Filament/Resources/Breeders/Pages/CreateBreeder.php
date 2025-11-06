@@ -15,6 +15,6 @@ class CreateBreeder extends CreateRecord
         return $this->getResource()::getUrl('index', [
             'tablePage' => request('tablePage')
         ]);
-    }   
+    }
 
 }

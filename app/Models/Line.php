@@ -4,12 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes; // DÔLEŽITÝ IMPORT
 
 class Line extends Model
 {
     use HasFactory;
-
+    use SoftDeletes; // PRIDAJTE TENTO TRAIT
     protected $table = 'lines';
+    protected $fillable = [
+        'meno_line',
+        'skratka_linie',
+        'povodca_linie',
+        'typ_line',
+    ];
     protected $guarded = [];
 
     public function getDisplayLabelAttribute(): string
@@ -23,3 +30,4 @@ class Line extends Model
     }
     // Tu sa pridávajú ďalšie relácie (napr. s Queen, ak by bola relácia namiesto varchar v tabuľke queens)
 }
+

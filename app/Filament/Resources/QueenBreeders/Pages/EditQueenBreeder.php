@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Filament\Resources\Breeders\Pages;
+namespace App\Filament\Resources\QueenBreeders\Pages;
 
-use App\Filament\Resources\Breeders\BreederResource;
+use App\Filament\Resources\QueenBreeders\QueenBreederResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
 
-class EditBreeder extends EditRecord
-{
-    protected static string $resource = BreederResource::class;
+class EditQueenBreeder extends EditRecord
+{       protected static string $resource = QueenBreederResource::class;
 
     // KĽÚČOVÁ ZMENA 1: Verejná vlastnosť na uloženie čísla stránky
+
     public ?string $page = null;
 
     // KĽÚČOVÁ ZMENA 2: Povie Livewire, aby túto vlastnosť čítal/zapisoval z/do URL
@@ -59,4 +59,3 @@ class EditBreeder extends EditRecord
         return $this->getResource()::getUrl('index');
     }
 }
-

@@ -1,19 +1,21 @@
 <?php
 
-namespace App\Filament\Resources\Breeders\Tables;
+namespace App\Filament\Resources\QueenBreeders\Tables;
 
-use App\Filament\Resources\Breeders\BreederResource; // TENTO RIADOK BOL PRIDANÝ
 use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;
+use Filament\Actions\ForceDeleteBulkAction;
+use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
-use Filament\Tables\Table; // Potrebujeme importovať triedu Resource!
+use Filament\Tables\Table;
+use App\Filament\Resources\QueenBreeders\QueenBreederResource; // TENTO RIADOK BOL PRIDANÝ
 
-class BreedersTable
+class QueenBreedersTable
 {
     public static function configure(Table $table): Table
     {
@@ -22,48 +24,53 @@ class BreedersTable
                 TextColumn::make('meno')
                     ->searchable(),
                 TextColumn::make('priezvisko')
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make('skratka_chovu')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('patri_k_chovatelovi_matiek')
-                    ->numeric()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->searchable(),
                 TextColumn::make('titul')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->searchable(),
                 TextColumn::make('CEHZ')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                ->label('CEHZ')
+                    ->searchable(),
+                TextColumn::make('skratka_chovu')
+                    ->searchable(),
                 TextColumn::make('adresa')
                     ->searchable(),
                 TextColumn::make('mesto')
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make('psc')
+                    ->searchable(),
+                TextColumn::make('PSC')
                 ->label('PSČ')
-                    ->searchable()
-                    ->sortable()
-                    ->toggleable(),
-                TextColumn::make('telefon')
-                -> label('Telefón')
-                    ->searchable()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->searchable(),
                 TextColumn::make('mail')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                   ->toggleable(isToggledHiddenByDefault: true)
+                    ->searchable(),
+                TextColumn::make('telefon')
+                ->label('Telefón')
+                   ->toggleable(isToggledHiddenByDefault: true)
+                    ->searchable(),
                 TextColumn::make('poznamka')
                 ->label('Poznámka')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('sposob_odberu_matiek')
-                ->label('Spôsob odberu matiek')
+                   ->toggleable(isToggledHiddenByDefault: true)
+                    ->searchable(),
+                TextColumn::make('opravnenie')
+                ->label('Oprávnenie')
+                   ->toggleable(isToggledHiddenByDefault: true)
                     ->numeric()
+                    ->sortable(),
+                TextColumn::make('podpis')
+                   ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('link_na_med')
+                   ->toggleable(isToggledHiddenByDefault: true)
+                    ->searchable(),
+                TextColumn::make('text_na_med')
+                   ->toggleable(isToggledHiddenByDefault: true)
+                    ->searchable(),
+                TextColumn::make('deleted_at')
+                    ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('reset_token_expire_at')
+                   ->toggleable(isToggledHiddenByDefault: true)
+                    ->dateTime()
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -75,13 +82,12 @@ class BreedersTable
             ])
             ->filters([
                 TrashedFilter::make(),
-                //
             ])
             ->recordActions([
                 // EditAction::make(),
                 EditAction::make()
                    // KĽÚČOVÁ ZMENA: PRIDANIE EditAction $action ako druhého argumentu
-                    ->url(fn ($record, EditAction $action) => BreederResource::getUrl('edit', [
+                    ->url(fn ($record, EditAction $action) => QueenBreederResource::getUrl('edit', [
                         'record' => $record,
                         // Spoľahlivo získa číslo aktuálnej stránky z komponentu tabuľky
                         'page' => $action->getLivewire()->getTablePage(),
@@ -93,6 +99,8 @@ class BreedersTable
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
+                    ForceDeleteBulkAction::make(),
+                    RestoreBulkAction::make(),
                 ]),
             ]);
     }
