@@ -5,11 +5,15 @@ namespace App\Filament\Resources\QueenBreeders\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\ForceDeleteAction;
+use Filament\Actions\RestoreAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use App\Filament\Resources\QueenBreeders\QueenBreederResource; // TENTO RIADOK BOL PRIDANÝ
 
 class QueenBreedersTable
 {
@@ -24,6 +28,7 @@ class QueenBreedersTable
                 TextColumn::make('titul')
                     ->searchable(),
                 TextColumn::make('CEHZ')
+                ->label('CEHZ')
                     ->searchable(),
                 TextColumn::make('skratka_chovu')
                     ->searchable(),
@@ -32,26 +37,35 @@ class QueenBreedersTable
                 TextColumn::make('mesto')
                     ->searchable(),
                 TextColumn::make('PSC')
+                ->label('PSČ')
                     ->searchable(),
                 TextColumn::make('mail')
+                   ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('telefon')
+                   ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('poznamka')
+                   ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('opravnenie')
+                   ->toggleable(isToggledHiddenByDefault: true)
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('podpis'),
+                TextColumn::make('podpis')
+                   ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('link_na_med')
+                   ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('text_na_med')
+                   ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('deleted_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('reset_token_expire_at')
+                   ->toggleable(isToggledHiddenByDefault: true)
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('created_at')
@@ -67,8 +81,18 @@ class QueenBreedersTable
                 TrashedFilter::make(),
             ])
             ->recordActions([
-                EditAction::make(),
-            ])
+                // EditAction::make(),
+                EditAction::make()
+                   // KĽÚČOVÁ ZMENA: PRIDANIE EditAction $action ako druhého argumentu
+                    ->url(fn ($record, EditAction $action) => QueenBreederResource::getUrl('edit', [
+                        'record' => $record,
+                        // Spoľahlivo získa číslo aktuálnej stránky z komponentu tabuľky
+                        'page' => $action->getLivewire()->getTablePage(),
+                    ])
+                    ),
+                DeleteAction::make(),
+                ForceDeleteAction::make(),
+                RestoreAction::make(),           ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
@@ -76,5 +100,5 @@ class QueenBreedersTable
                     RestoreBulkAction::make(),
                 ]),
             ]);
-    } 
+    }
 }

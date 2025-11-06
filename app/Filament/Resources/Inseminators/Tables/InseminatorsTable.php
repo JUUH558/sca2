@@ -5,11 +5,15 @@ namespace App\Filament\Resources\Inseminators\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ForceDeleteAction;
+use Filament\Actions\RestoreAction;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use App\Filament\Resources\Inseminators\InseminatorResource; // TENTO RIADOK BOL PRIDANÝ
 
 class InseminatorsTable
 {
@@ -26,6 +30,7 @@ class InseminatorsTable
                 TextColumn::make('mail')
                     ->searchable(),
                 TextColumn::make('telefon')
+                ->label('Telefón')
                     ->searchable(),
                 TextColumn::make('deleted_at')
                     ->dateTime()
@@ -44,8 +49,17 @@ class InseminatorsTable
                 TrashedFilter::make(),
             ])
             ->recordActions([
-                EditAction::make(),
-            ])
+               EditAction::make()
+                   // KĽÚČOVÁ ZMENA: PRIDANIE EditAction $action ako druhého argumentu
+                    ->url(fn ($record, EditAction $action) => InseminatorResource::getUrl('edit', [
+                        'record' => $record,
+                        // Spoľahlivo získa číslo aktuálnej stránky z komponentu tabuľky
+                        'page' => $action->getLivewire()->getTablePage(),
+                    ])
+                    ),
+                DeleteAction::make(),
+                ForceDeleteAction::make(),
+                RestoreAction::make(),           ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

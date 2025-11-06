@@ -42,21 +42,25 @@ class BreedersTable
                 TextColumn::make('mesto')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('psč')
+                TextColumn::make('psc')
+                ->label('PSČ')
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-                TextColumn::make('telefón')
+                TextColumn::make('telefon')
+                -> label('Telefón')
                     ->searchable()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('mail')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('poznámka')
+                TextColumn::make('poznamka')
+                ->label('Poznámka')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('spôsob_odberu_matiek')
+                TextColumn::make('sposob_odberu_matiek')
+                ->label('Spôsob odberu matiek')
                     ->numeric()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
