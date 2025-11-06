@@ -1,16 +1,18 @@
 <?php
 
-namespace App\Filament\Resources\QueenBreeders\Pages;
+namespace App\Filament\Resources\Inseminators\Pages;
 
-use App\Filament\Resources\QueenBreeders\QueenBreederResource;
+use App\Filament\Resources\Inseminators\InseminatorResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
 
-class EditQueenBreeder extends EditRecord
-{       protected static string $resource = QueenBreederResource::class;
+
+class EditInseminator extends EditRecord
+
+{       protected static string $resource = InseminatorResource::class;
 
     // KĽÚČOVÁ ZMENA 1: Verejná vlastnosť na uloženie čísla stránky
 
