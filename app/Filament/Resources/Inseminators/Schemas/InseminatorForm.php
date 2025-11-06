@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Inseminators\Schemas;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
+
 class InseminatorForm
 {
     public static function configure(Schema $schema): Schema
@@ -21,5 +22,5 @@ class InseminatorForm
                 TextInput::make('telefon')
                     ->tel(),
             ]);
-    } 
+    }
 }
