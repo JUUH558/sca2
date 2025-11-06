@@ -19,11 +19,14 @@ class PedigreeQueensTable
         return $table
             ->columns([
                 TextColumn::make('CEHZ')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('skratka_chovu')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 IconColumn::make('matka_zije')
-                    ->boolean(),
+                    ->boolean()
+                    ->sortable(),
                 TextColumn::make('evidencne_cislo')
                     ->searchable(),
                 TextColumn::make('mama_matky')
@@ -33,24 +36,30 @@ class PedigreeQueensTable
                 TextColumn::make('matka_trudov')
                     ->searchable(),
                 TextColumn::make('linia')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('oznacenie_matky')
                     ->searchable(),
                 TextColumn::make('datum_narodenia')
                     ->date()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
                 TextColumn::make('datum_inseminacie')
                     ->date()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
                 TextColumn::make('imbreeding')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('kladie_od')
                     ->date()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('umiestnenie')
                     ->searchable(),
                 TextColumn::make('poznamka')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('deleted_at')
                     ->dateTime()
                     ->sortable()
@@ -75,7 +84,7 @@ class PedigreeQueensTable
                     DeleteBulkAction::make(),
                     ForceDeleteBulkAction::make(),
                     RestoreBulkAction::make(),
-                    
+
                 ]),
             ]);
     }

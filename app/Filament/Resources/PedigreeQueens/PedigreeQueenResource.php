@@ -15,6 +15,7 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class PedigreeQueenResource extends Resource
 {
@@ -39,7 +40,7 @@ class PedigreeQueenResource extends Resource
         return [
             //
         ];
-    } 
+    }
 
     public static function getPages(): array
     {
@@ -48,6 +49,31 @@ class PedigreeQueenResource extends Resource
             'create' => CreatePedigreeQueen::route('/create'),
             'edit' => EditPedigreeQueen::route('/{record}/edit'),
         ];
+    }
+    // KĽÚČOVÁ ZMENA: Filtrovanie záznamov pre zoznam
+    // Táto metóda definuje, aké záznamy sa vôbec zobrazia v zozname.
+    public static function getEloquentQuery(): Builder
+    {
+        // 1. Získanie základného dopytu
+        $query = parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
+
+        // 2. Získanie mena prihláseného používateľa (admina)
+        // Používame globálnu funkciu \auth() pre spoľahlivé získanie prihláseného používateľa.
+        // Pridávame kontrolu, či je používateľ prihlásený.
+        if (Auth::check()) {
+            // Predpokladáme, že meno je v stĺpci 'name' modelu User
+            $adminName = Auth::user()->name;
+
+            // 3. Aplikovanie podmienky filtrovania
+            // Filtrujeme, aby 'skratka_chovu' bola rovná menu prihláseného užívateľa
+            return $query->where('skratka_chovu', $adminName);
+        }
+
+        // Ak nie je prihlásený, nezobrazujeme žiadne záznamy (alebo sa Filament postará o redirect)
+        return $query->whereRaw('1 = 0');
     }
 
     public static function getRecordRouteBindingEloquentQuery(): Builder
