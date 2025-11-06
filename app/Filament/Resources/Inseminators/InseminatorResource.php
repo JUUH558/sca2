@@ -32,7 +32,7 @@ class InseminatorResource extends Resource
     public static function table(Table $table): Table
     {
         return InseminatorsTable::configure($table);
-    } 
+    }
 
     public static function getRelations(): array
     {
@@ -57,4 +57,20 @@ class InseminatorResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+        // preklad názvov tabuliek
+    public static function getModelLabel(): string
+    {
+        return 'Inseminátor';
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return 'Inseminátori';
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'Inseminátori';
+    }
+
 }

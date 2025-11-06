@@ -83,4 +83,20 @@ class PedigreeQueenResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+        // preklad názvov tabuliek
+    public static function getModelLabel(): string
+    {
+        return 'Plemenná matka';
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return 'Plemenné matky';
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'Plemenné matky';
+    }
+
 }

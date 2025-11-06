@@ -49,10 +49,12 @@ class PedigreeQueensTable
                 ->label('Označenie')
                     ->searchable(),
                 TextColumn::make('datum_narodenia')
+                ->label('Dátum narodenia')
                     ->date()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
                 TextColumn::make('datum_inseminacie')
+                ->label('Dátum inseminácie')
                     ->date()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
@@ -65,8 +67,10 @@ class PedigreeQueensTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('umiestnenie')
+                ->toggleable()
                     ->searchable(),
                 TextColumn::make('poznamka')
+                ->label('Poznámka')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('deleted_at')

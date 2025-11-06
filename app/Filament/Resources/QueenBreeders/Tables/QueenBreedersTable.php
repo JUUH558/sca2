@@ -43,12 +43,15 @@ class QueenBreedersTable
                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('telefon')
+                ->label('Telefón')
                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('poznamka')
+                ->label('Poznámka')
                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('opravnenie')
+                ->label('Oprávnenie')
                    ->toggleable(isToggledHiddenByDefault: true)
                     ->numeric()
                     ->sortable(),

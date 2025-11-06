@@ -99,6 +99,6 @@ class BreederResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return 'Správa chovateľov';
+        return 'Chovatelia';
     }
 }

@@ -14,7 +14,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope; 
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class QueenBreederResource extends Resource
 {
@@ -57,4 +57,20 @@ class QueenBreederResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+        // preklad názvov tabuliek
+    public static function getModelLabel(): string
+    {
+        return 'Chovateľa matiek';
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return 'Chovatelia matiek';
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'Chovatelia matiek';
+    }
+
 }

@@ -32,7 +32,7 @@ class LineResource extends Resource
     public static function table(Table $table): Table
     {
         return LinesTable::configure($table);
-    } 
+    }
 
     public static function getRelations(): array
     {
@@ -57,4 +57,20 @@ class LineResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+        // preklad názvov tabuliek
+    public static function getModelLabel(): string
+    {
+        return 'Línia';
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return 'Línie';
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'Línie';
+    }
+
 }
