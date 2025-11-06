@@ -8,6 +8,7 @@ use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;
 use Filament\Resources\Pages\EditRecord;
 
+
 class EditInseminator extends EditRecord
 {
     protected static string $resource = InseminatorResource::class;
@@ -19,5 +20,5 @@ class EditInseminator extends EditRecord
             ForceDeleteAction::make(),
             RestoreAction::make(),
         ];
-    } 
+    }
 }

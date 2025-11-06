@@ -6,6 +6,7 @@ use App\Filament\Resources\Inseminators\InseminatorResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
+
 class ListInseminators extends ListRecords
 {
     protected static string $resource = InseminatorResource::class;
@@ -15,5 +16,5 @@ class ListInseminators extends ListRecords
         return [
             CreateAction::make(),
         ];
-    } 
+    }
 }
