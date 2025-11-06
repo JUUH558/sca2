@@ -38,6 +38,7 @@ class QueenBreeder extends Authenticatable
         'poznamka',
         'password',  // Password nahrávame samostatne
         'opravnenie',
+        //'podpis', // binárne dáta
         'link_na_med',
         'text_na_med',
     ];
@@ -46,6 +47,7 @@ class QueenBreeder extends Authenticatable
     protected $hidden = [
         'password',
         'reset_token',
+        'podpis', // binárne dáta ak to tu nie je, môže spôsobiť problémy
     ];
 
     // Atribúty, ktoré by mali byť pretypované

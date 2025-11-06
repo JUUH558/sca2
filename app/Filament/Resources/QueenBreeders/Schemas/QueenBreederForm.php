@@ -33,10 +33,10 @@ class QueenBreederForm
                 TextInput::make('opravnenie')
                     ->required()
                     ->numeric(),
-                TextInput::make('podpis'),
+                //TextInput::make('podpis'),
                 TextInput::make('link_na_med'),
                 TextInput::make('text_na_med'),
                 DateTimePicker::make('reset_token_expire_at'),
-            ]); 
+            ]);
     }
 }
