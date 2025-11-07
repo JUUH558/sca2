@@ -69,7 +69,7 @@ class PedigreeQueenResource extends Resource
 
             // 3. Aplikovanie podmienky filtrovania
             // Filtrujeme, aby 'skratka_chovu' bola rovná menu prihláseného užívateľa
-            return $query->where('skratka_chovu', $adminName);
+            return $query->where('skratka_chovu', $adminName)->orderByDesc('matka_zije');
         }
 
         // Ak nie je prihlásený, nezobrazujeme žiadne záznamy (alebo sa Filament postará o redirect)

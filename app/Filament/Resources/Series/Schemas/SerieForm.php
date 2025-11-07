@@ -22,6 +22,9 @@ class SerieForm
         return $schema
             ->components([
                 TextInput::make('seria')
+                ->readonly()
+                                    ->placeholder('Automaticky doplnené po uložení')
+
                     ->numeric(),
 
                 // ZMENA 1: Select komponent s dynamicou logikou
@@ -71,16 +74,16 @@ class SerieForm
                 TextInput::make('mama_matky') // Toto pole zobrazuje Matku vybranej Plemennej Matky
                     ->label('Matka vybranej plemennej matky (CEHZ)') // Nový label
                     ->placeholder('Automaticky doplnené po výbere Plemennej matky')
-                    ->disabled() // Pole je len na zobrazenie
-                    ->dehydrated(false) // Hodnota sa neuloží do modelu Serie (len zobrazenie)
+                    ->readonly() // Pole je len na zobrazenie
+                    //->dehydrated(false) // Hodnota sa neuloží do modelu Serie (len zobrazenie)
                     ->required(),
 
                 // ZMENA 3: TextInput pre otca, teraz dynamicky plnený
                 TextInput::make('otec_matky')
                     ->label('Otec vybranej plemennej matky (CEHZ)')
                     ->placeholder('Automaticky doplnené po výbere Plemennej matky')
-                    ->disabled() // Pole je len na zobrazenie
-                    ->dehydrated(false), // Hodnota sa neuloží do modelu Serie (len zobrazenie)
+                    ->readonly(), // Pole je len na zobrazenie
+                    //->dehydrated(false), // Hodnota sa neuloží do modelu Serie (len zobrazenie)
 
                 DatePicker::make('datum_zalozenia_serie')
                     ->required(),

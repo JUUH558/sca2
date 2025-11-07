@@ -7,7 +7,7 @@ use App\Filament\Resources\QueenBreeders\Pages\EditQueenBreeder;
 use App\Filament\Resources\QueenBreeders\Pages\ListQueenBreeders;
 use App\Filament\Resources\QueenBreeders\Schemas\QueenBreederForm;
 use App\Filament\Resources\QueenBreeders\Tables\QueenBreedersTable;
-use App\Models\QueenBreeder;
+use App\Models\User;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class QueenBreederResource extends Resource
 {
-    protected static ?string $model = QueenBreeder::class;
+    protected static ?string $model = User::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 

@@ -8,10 +8,22 @@ use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class EditBreeder extends EditRecord
 {
     protected static string $resource = BreederResource::class;
+
+        protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        // Nastavíme skratku chovu z prihláseného používateľa
+        $data['skratka_chovu'] = Auth::user()->name;
+
+        // Nastavíme ID prihláseného používateľa
+        $data['patri_k_chovatelovi_matiek'] = Auth::user()->id;
+
+        return $data;
+    }
 
     // KĽÚČOVÁ ZMENA 1: Verejná vlastnosť na uloženie čísla stránky
     public ?string $page = null;
