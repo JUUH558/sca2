@@ -11,16 +11,20 @@ class Serie extends Model
 
     // Pôvodná tabuľka: seria
     protected $table = 'series';
+
     protected $guarded = [];
-protected $fillable = [
+
+    protected $fillable = [
         'seria', // Séria,
         'skratka_chovu', // Skratka chovu, napr. "UHJ"
-        'rok', // Rok, napr. 2023
+        'datum_liahnutia_matiek', // Rok, napr. 2023
         'datum_zalozenia_serie', // Dátum založenia série
         'mama_matky', // Mama matky
         'otec_matky', // Otec matky
+        'CEHZ','rok',
+        'linia','prelarvovane','prijate','zavieckovane','vyliahnute','oplodnene','predane',
     ];
-    //public $timestamps = false;
+    // public $timestamps = false;
 
     public function getDisplayLabelAttribute(): string
     {

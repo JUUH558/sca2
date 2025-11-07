@@ -1,0 +1,104 @@
+<?php
+
+namespace App\Filament\Resources\Series;
+
+use App\Filament\Resources\Series\Pages\CreateSerie;
+use App\Filament\Resources\Series\Pages\EditSerie;
+use App\Filament\Resources\Series\Pages\ListSeries;
+use App\Filament\Resources\Series\Schemas\SerieForm;
+use App\Filament\Resources\Series\Tables\SeriesTable;
+use App\Models\Serie;
+use BackedEnum;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
+
+class SerieResource extends Resource
+{
+    protected static ?string $model = Serie::class;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    protected static ?string $recordTitleAttribute = 'Série';
+
+    public static function form(Schema $schema): Schema
+    {
+        return SerieForm::configure($schema);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return SeriesTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListSeries::route('/'),
+            'create' => CreateSerie::route('/create'),
+            'edit' => EditSerie::route('/{record}/edit'),
+        ];
+    }
+
+    // KĽÚČOVÁ ZMENA: Filtrovanie záznamov pre zoznam
+    // Táto metóda definuje, aké záznamy sa vôbec zobrazia v zozname.
+    public static function getEloquentQuery(): Builder
+    {
+        // 1. Získanie základného dopytu
+        $query = parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
+        $rok = date('Y');
+
+        // 2. Získanie mena prihláseného používateľa (admina)
+        // Používame globálnu funkciu \auth() pre spoľahlivé získanie prihláseného používateľa.
+        // Pridávame kontrolu, či je používateľ prihlásený.
+        if (Auth::check()) {
+            // Predpokladáme, že meno je v stĺpci 'name' modelu User
+            $adminName = Auth::user()->name;
+
+            // 3. Aplikovanie podmienky filtrovania
+            // Filtrujeme, aby 'skratka_chovu' bola rovná menu prihláseného užívateľa
+            return $query->where('skratka_chovu', $adminName)->where('rok', $rok);
+        }
+
+        // Ak nie je prihlásený, nezobrazujeme žiadne záznamy (alebo sa Filament postará o redirect)
+        return $query->whereRaw('1 = 0');
+    }
+
+    public static function getRecordRouteBindingEloquentQuery(): Builder
+    {
+        return parent::getRecordRouteBindingEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
+    }
+
+    // preklad názvov tabuliek
+    public static function getModelLabel(): string
+    {
+        return 'Séria';
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return 'Série';
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'Série';
+    }
+}
