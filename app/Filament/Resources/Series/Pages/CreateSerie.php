@@ -97,5 +97,6 @@ class CreateSerie extends CreateRecord
         return $this->getResource()::getUrl('index', [
             'page' => $lastPage,
         ]);
+
     }
 }
