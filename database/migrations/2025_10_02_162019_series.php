@@ -26,7 +26,7 @@ return new class extends Migration
 
             // Rodičovské informácie
             $table->string('mama_matky', 10); // NOT NULL
-            $table->string('otec_matky', 10)->nullable();
+            $table->string('otec_matky', 10);
 
             // Dátumy
             $table->date('datum_zalozenia_serie'); // NOT NULL

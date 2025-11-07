@@ -17,7 +17,7 @@ class SerieForm
     {
         // Vytvorenie reťazca pre zobrazenie v Select komponente
         // Predpokladáme, že 'evidencne_cislo' a 'mama_matky' sú stĺpce v PedigreeQueen
-        $concatenatedLabel = DB::raw("CONCAT(evidencne_cislo, ' - ', mama_matky)");
+        $concatenatedLabel = DB::raw("CONCAT(evidencne_cislo, ' - ', mama_matky, ' úľ:',umiestnenie)");
 
         return $schema
             ->components([
@@ -47,10 +47,11 @@ class SerieForm
                                 // 2. Aktualizujeme pole s matkou (matka vybranej matky)
                                 // Predpokladáme, že jej mama je v stĺpci 'mama_matky' (CEHZ/meno)
                                 $set('mama_matky', $queen->evidencne_cislo);
+                                $set('otec_matky', $queen->otec_matky);
 
                                 // 3. Aktualizujeme pole s otcom (otec vybranej matky)
                                 // Predpokladáme, že jej otec je v stĺpci 'otec_matky' (CEHZ/meno)
-                                $set('otec_matky', $queen->mama_matky);
+                                //$set('otec_matky', $queen->mama_matky);
                                 $set('linia', $queen->linia);
 
 

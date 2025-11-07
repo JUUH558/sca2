@@ -26,7 +26,7 @@ class Serie extends Model
     ];
     // public $timestamps = false;
 
-    public function getDisplayLabelAttribute(): string
+/*     public function getDisplayLabelAttribute(): string
     {
         // Najprv zistiť hodnoty, ak sú null, použiť predvolené.
         $mama = $this->mama_matky ?? 'Nezadaná mama';
@@ -35,4 +35,4 @@ class Serie extends Model
         // Teraz použijeme premenné v jednoduchej interpolácii.
         return "{$this->seria} {$this->datum_zalozenia_serie} ({$mama}, {$otec})";
     }
-}
+ */}
