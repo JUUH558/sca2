@@ -34,7 +34,7 @@ class SerieForm
                     ->options(
                         // Filtrovanie dopytu na model PedigreeQueen
                         PedigreeQueen::query()
-                            ->where('skratka_chovu', Auth::user()->name)
+                            ->where('skratka_chovu', Auth::user()->skratka_chovu)
                             ->where('matka_zije', 1)
                             // Opravené: pluck musí mať kľúč (id) a hodnotu (konkatenovaný reťazec)
                             ->pluck($concatenatedLabel, 'id')

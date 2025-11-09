@@ -12,7 +12,15 @@ class QueenBreederYear extends Model
 
     // Pôvodná tabuľka: chovatel_m_rok
     protected $table = 'queen_breeder_years';
-    protected $guarded = [];
+    protected $fillable = [
+        'chovatel_matiek_id',
+        'rok',
+        'datum_povolenia_RVPS',
+        'cislo_dekretu',
+        'typ_chovu',
+        'skratka_chovu',
+        'RVPS',
+    ];
 
     public $timestamps = false;
 
