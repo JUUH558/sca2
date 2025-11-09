@@ -19,6 +19,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
+
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -26,8 +27,11 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path('admin')
+            ->path('sca')
             ->login()
+            ->sidebarCollapsibleOnDesktop()
+            ->brandLogo(asset('images/sca2.png'))
+            ->brandLogoHeight('5rem')
             ->colors([
                 'primary' => Color::Amber,
                 'gray' => Color::Gray,
@@ -41,7 +45,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 AccountWidget::class,
-                FilamentInfoWidget::class,
+                //FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Casts\Attribute; // DÔLEŽITÝ IMPORT PRE ACCESSOR
+use Illuminate\Support\Str; // DÔLEŽITÝ IMPORT PRE ACCESSOR
 
 class User extends Authenticatable
 {
@@ -23,7 +23,6 @@ class User extends Authenticatable
         'skratka_chovu',
         'email',
         'password',
-
         'meno',
         'priezvisko',
         'titul',
@@ -36,8 +35,6 @@ class User extends Authenticatable
         'link_na_med',
         'text_na_med',
         'opravnenie',
-        'podpis',
-
         'reset_token_expire_at',
         'deleted_at',
     ];
@@ -50,6 +47,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'podpis',
     ];
 
     /**
@@ -71,8 +69,6 @@ class User extends Authenticatable
 
     /**
      * Definuje virtuálnu vlastnosť 'name', ktorú očakáva Laravel a Filament.
-     *
-     * @return Attribute
      */
     protected function name(): Attribute
     {
@@ -81,29 +77,27 @@ class User extends Authenticatable
             // 1. Priorita: Meno a Priezvisko (ak existujú)
             $fullName = trim("{$this->titul} {$this->meno} {$this->priezvisko}");
 
-            if (!empty($fullName)) {
+            if (! empty($fullName)) {
                 return $fullName;
             }
 
             // 2. Priorita: Skratka chovu
-            if (!empty($this->skratka_chovu)) {
+            if (! empty($this->skratka_chovu)) {
                 return $this->skratka_chovu;
             }
 
             // 3. Priorita: Email (odstránime text za @)
-            if (!empty($this->email)) {
-                return Str::before($this->email, '@') . ' (E-mail)';
+            if (! empty($this->email)) {
+                return Str::before($this->email, '@').' (E-mail)';
             }
 
             // 4. Fallback: Garancia, že VŽDY vrátime string
-            return 'Neznámy Používateľ ID:' . $this->id;
+            return 'Neznámy Používateľ ID:'.$this->id;
         });
     }
 
     /**
      * Metóda, ktorú Filament môže tiež použiť (volá internú vlastnosť name).
-     *
-     * @return string
      */
     public function getFilamentName(): string
     {
