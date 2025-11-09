@@ -29,7 +29,7 @@ class QueenForm
 
  */
 
-                // Select komponent pre výber Plemennej Matky
+                // Select komponent pre výber Série
                 Select::make('seria_select_id') // Pole pre výber ID Plemennej matky (zobrazuje sa)
                     ->label('Seria číslo - mama matky - otec matky') // Používateľsky čitateľný názov
                     ->live() // Kľúčové: Spustí aktualizáciu pri zmene hodnoty
