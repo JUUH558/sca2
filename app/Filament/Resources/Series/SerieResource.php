@@ -67,11 +67,12 @@ class SerieResource extends Resource
         // Pridávame kontrolu, či je používateľ prihlásený.
         if (Auth::check()) {
             // Predpokladáme, že meno je v stĺpci 'name' modelu User
-            $adminName = Auth::user()->name;
+            //$adminName = Auth::user()->name;
+            $skratka_chovu = Auth::user()->skratka_chovu;
 
             // 3. Aplikovanie podmienky filtrovania
             // Filtrujeme, aby 'skratka_chovu' bola rovná menu prihláseného užívateľa
-            return $query->where('skratka_chovu', $adminName)->where('rok', $rok);
+            return $query->where('skratka_chovu', $skratka_chovu)->where('rok', $rok);
         }
 
         // Ak nie je prihlásený, nezobrazujeme žiadne záznamy (alebo sa Filament postará o redirect)

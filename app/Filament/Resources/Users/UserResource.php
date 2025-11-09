@@ -60,17 +60,17 @@ class UserResource extends Resource
             // preklad názvov tabuliek
         public static function getModelLabel(): string
     {
-        return 'Chovateľa matiek2';
+        return 'Chovateľa matiek';
     }
 
     public static function getPluralModelLabel(): string
     {
-        return 'Chovatelia matiek2';
+        return 'Chovatelia matiek';
     }
 
     public static function getNavigationLabel(): string
     {
-        return 'Chovatelia matiek2';
+        return 'Chovatelia matiek';
     }
 
 }
