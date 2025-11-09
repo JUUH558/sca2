@@ -21,7 +21,7 @@ class QueenForm
         // Vytvorenie reťazca pre zobrazenie v Select komponente
         // Predpokladáme, že 'evidencne_cislo' a 'mama_matky' sú stĺpce v PedigreeQueen
         $concatenatedLabelSerie = DB::raw("CONCAT(seria, ' - ', mama_matky, ' - ',otec_matky)");
-        $concatenatedLabelInseminator = DB::raw("CONCAT(meno, ' ', priezvisko)");
+        $concatenatedLabelInseminator = DB::raw("CONCAT(titul, ' ',meno, ' ', priezvisko)");
         $concatenatedLabelBreeder = DB::raw("CONCAT(meno, ' - ', priezvisko, ' - ',mesto)");
 
         return $schema
