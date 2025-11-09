@@ -7,9 +7,9 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str; // Pre prácu s reťazcami
 use Illuminate\Support\Facades\Auth;
+// Pre prácu s reťazcami
+use Illuminate\Support\Facades\DB;
 
 class SerieForm
 {
@@ -22,8 +22,8 @@ class SerieForm
         return $schema
             ->components([
                 TextInput::make('seria')
-                ->readonly()
-                                    ->placeholder('Automaticky doplnené po uložení')
+                    ->readonly()
+                    ->placeholder('Automaticky doplnené po uložení')
 
                     ->numeric(),
 
@@ -54,9 +54,8 @@ class SerieForm
 
                                 // 3. Aktualizujeme pole s otcom (otec vybranej matky)
                                 // Predpokladáme, že jej otec je v stĺpci 'otec_matky' (CEHZ/meno)
-                                //$set('otec_matky', $queen->mama_matky);
+                                // $set('otec_matky', $queen->mama_matky);
                                 $set('linia', $queen->linia);
-
 
                             }
                         } else {
@@ -75,7 +74,7 @@ class SerieForm
                     ->label('Matka vybranej plemennej matky (CEHZ)') // Nový label
                     ->placeholder('Automaticky doplnené po výbere Plemennej matky')
                     ->readonly() // Pole je len na zobrazenie
-                    //->dehydrated(false) // Hodnota sa neuloží do modelu Serie (len zobrazenie)
+                    // ->dehydrated(false) // Hodnota sa neuloží do modelu Serie (len zobrazenie)
                     ->required(),
 
                 // ZMENA 3: TextInput pre otca, teraz dynamicky plnený
@@ -83,7 +82,7 @@ class SerieForm
                     ->label('Otec vybranej plemennej matky (CEHZ)')
                     ->placeholder('Automaticky doplnené po výbere Plemennej matky')
                     ->readonly(), // Pole je len na zobrazenie
-                    //->dehydrated(false), // Hodnota sa neuloží do modelu Serie (len zobrazenie)
+                // ->dehydrated(false), // Hodnota sa neuloží do modelu Serie (len zobrazenie)
 
                 DatePicker::make('datum_zalozenia_serie')
                     ->required(),
@@ -111,8 +110,6 @@ class SerieForm
             ]);
     }
 }
-
-
 
 /* <?php
 

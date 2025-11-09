@@ -50,12 +50,12 @@ class PedigreeQueensTable
                     ->searchable(),
                 TextColumn::make('datum_narodenia')
                 ->label('Dátum narodenia')
-                    ->date()
+                    ->date('d.m.Y')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
                 TextColumn::make('datum_inseminacie')
                 ->label('Dátum inseminácie')
-                    ->date()
+                    ->date('d.m.Y')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
                 TextColumn::make('imbreeding')
@@ -63,7 +63,7 @@ class PedigreeQueensTable
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('kladie_od')
-                    ->date()
+                    ->date('d.m.Y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('umiestnenie')

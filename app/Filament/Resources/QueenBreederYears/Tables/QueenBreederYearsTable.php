@@ -26,7 +26,7 @@ class QueenBreederYearsTable
                     ->searchable(),
                 TextColumn::make('datum_povolenia_RVPS')
                     ->label('Dátum povolenia RVPS')
-                    ->date(),
+                    ->date('d.m.Y'),
                 TextColumn::make('cislo_dekretu')
                     ->label('Číslo dekrétu')
                     ->searchable(),

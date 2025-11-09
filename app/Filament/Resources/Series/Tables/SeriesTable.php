@@ -15,7 +15,7 @@ class SeriesTable
     {
         return $table
             ->extremePaginationLinks()
-            
+
             ->columns([
                 TextColumn::make('seria')
                     ->numeric()
@@ -35,10 +35,10 @@ class SeriesTable
                     ->searchable(),
                 TextColumn::make('datum_zalozenia_serie')
                     ->toggleable()
-                    ->date()
+                    ->date('d.m.Y')
                     ->sortable(),
                 TextColumn::make('datum_liahnutia_matiek')
-                    ->date()
+                    ->date('d.m.Y')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
                 TextColumn::make('linia')
