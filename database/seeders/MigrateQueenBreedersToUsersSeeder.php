@@ -12,6 +12,7 @@ class MigrateQueenBreedersToUsersSeeder extends Seeder
 {
     /**
      * Spustí presun dát.
+     * php artisan db:seed --class=MigrateQueenBreedersToUsersSeeder
      */
     public function run(): void
     {
