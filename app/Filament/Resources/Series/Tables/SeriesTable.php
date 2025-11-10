@@ -18,6 +18,7 @@ class SeriesTable
 
             ->columns([
                 TextColumn::make('seria')
+                    ->label('Séria')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('CEHZ')
@@ -34,37 +35,46 @@ class SeriesTable
                 TextColumn::make('otec_matky')
                     ->searchable(),
                 TextColumn::make('datum_zalozenia_serie')
+                    ->label('Dátum založenia série')
                     ->toggleable()
                     ->date('d.m.Y')
                     ->sortable(),
                 TextColumn::make('datum_liahnutia_matiek')
+                    ->label('Dátum liahnutia matiek')
                     ->date('d.m.Y')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
                 TextColumn::make('linia')
+                    ->label('Línia')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('prelarvovane')
+                    ->label('Prelarvované')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('prijate')
+                    ->label('Prijaté')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('zavieckovane')
+                    ->label('Zaviečkované')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('vyliahnute')
+                    ->label('Vyliahnuté')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('oplodnene')
+                    ->label('Oplodnené')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('predane')
+                    ->label('Predané')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->numeric()
                     ->sortable(),
@@ -83,12 +93,13 @@ class SeriesTable
             ->recordActions([
                 // EditAction::make(),
                 EditAction::make()
-                   // KĽÚČOVÁ ZMENA: PRIDANIE EditAction $action ako druhého argumentu
-                    ->url(fn ($record, EditAction $action) => SerieResource::getUrl('edit', [
-                        'record' => $record,
-                        // Spoľahlivo získa číslo aktuálnej stránky z komponentu tabuľky
-                        'page' => $action->getLivewire()->getTablePage(),
-                    ])
+                    // KĽÚČOVÁ ZMENA: PRIDANIE EditAction $action ako druhého argumentu
+                    ->url(
+                        fn($record, EditAction $action) => SerieResource::getUrl('edit', [
+                            'record' => $record,
+                            // Spoľahlivo získa číslo aktuálnej stránky z komponentu tabuľky
+                            'page' => $action->getLivewire()->getTablePage(),
+                        ])
                     ),
             ])
             ->toolbarActions([
