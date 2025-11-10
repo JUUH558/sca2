@@ -22,6 +22,8 @@ class QueenResource extends Resource
     protected static ?string $model = Queen::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static bool $hasTitleCaseModelLabel = false;
+    //protected static ?int $navigationSort = 9;
 
     protected static ?string $recordTitleAttribute = 'Matky';
 
@@ -50,7 +52,7 @@ class QueenResource extends Resource
             'edit' => EditQueen::route('/{record}/edit'),
         ];
     }
-        // KĽÚČOVÁ ZMENA: Filtrovanie záznamov pre zoznam
+    // KĽÚČOVÁ ZMENA: Filtrovanie záznamov pre zoznam
     // Táto metóda definuje, aké záznamy sa vôbec zobrazia v zozname.
     public static function getEloquentQuery(): Builder
     {

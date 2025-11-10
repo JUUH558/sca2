@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 class QueenBreederYearResource extends Resource
 {
     protected static ?string $model = QueenBreederYear::class;
+    protected static bool $hasTitleCaseModelLabel = false;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 

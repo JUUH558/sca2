@@ -22,6 +22,7 @@ class PedigreeQueenResource extends Resource
     protected static ?string $model = PedigreeQueen::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static bool $hasTitleCaseModelLabel = false;
 
     protected static ?string $recordTitleAttribute = 'Plemenné matky';
 
@@ -84,7 +85,7 @@ class PedigreeQueenResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
-        // preklad názvov tabuliek
+    // preklad názvov tabuliek
     public static function getModelLabel(): string
     {
         return 'Plemenná matka';
@@ -99,5 +100,4 @@ class PedigreeQueenResource extends Resource
     {
         return 'Plemenné matky';
     }
-
 }

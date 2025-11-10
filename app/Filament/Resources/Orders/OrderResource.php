@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
+    protected static bool $hasTitleCaseModelLabel = false;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
@@ -71,9 +72,9 @@ class OrderResource extends Resource
             // 3. Aplikovanie podmienky filtrovania
             // Filtrujeme, aby 'skratka_chovu' bola rovná menu prihláseného užívateľa
             return $query
-            ->where('skratka_chovu', $skratka_chovu)
-            ->orderBy('datum_objednavky','asc')
-            ->where('rok', date('Y'));
+                ->where('skratka_chovu', $skratka_chovu)
+                ->orderBy('datum_objednavky', 'asc')
+                ->where('rok', date('Y'));
         }
 
         // Ak nie je prihlásený, nezobrazujeme žiadne záznamy (alebo sa Filament postará o redirect)
@@ -87,7 +88,7 @@ class OrderResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
-        // preklad názvov tabuliek
+    // preklad názvov tabuliek
     public static function getModelLabel(): string
     {
         return 'Objednávky';
@@ -102,5 +103,4 @@ class OrderResource extends Resource
     {
         return 'Objednávky';
     }
-
 }
