@@ -18,7 +18,19 @@ class Breeder extends Model
     protected $guarded = [];
 
     protected $fillable = [
-        'meno', 'priezvisko', 'adresa', 'mesto', 'psc', 'deleted_at', 'titul', 'telefon', 'mail', 'CEHZ', 'patri_k_chovatelovi_matiek', 'skratka_chovu',
+        'meno',
+        'priezvisko',
+        'adresa',
+        'mesto',
+        'psc',
+        'titul',
+        'telefon',
+        'mail',
+        'CEHZ',
+        'patri_k_chovatelovi_matiek',
+        'skratka_chovu',
+        'poznamka',
+        'sposob_odberu_matiek',
         // ... ostatné polia
     ];
 

@@ -13,15 +13,13 @@ class PedigreeQueen extends Model
 
     // Pôvodná tabuľka: plemenna_matka
     protected $table = 'pedigree_queens';
+
     protected $fillable = [
-        'id',
-        'CEHZ',
-        'skratka_chovu',
         'matka_zije',
         'evidencne_cislo',
         'mama_matky',
         'otec_matky',
-        'matka_trudova',
+        'matka_trudov',
         'linia',
         'oznacenie_matky',
         'datum_narodenia',
@@ -32,10 +30,10 @@ class PedigreeQueen extends Model
         'umiestnenie',
 
     ];
+
     protected $guarded = [];
 
     public $timestamps = false;
 
     // Tu by mala byť relácia na Queen (Matka)
 }
-

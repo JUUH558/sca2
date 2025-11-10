@@ -35,8 +35,6 @@ class User extends Authenticatable
         'link_na_med',
         'text_na_med',
         'opravnenie',
-        'reset_token_expire_at',
-        'deleted_at',
     ];
 
     /**

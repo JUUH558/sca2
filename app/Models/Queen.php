@@ -27,6 +27,20 @@ class Queen extends Model
         'linia',
         'inseminoval',
         'chovatel_matiek_id', // ID chovateľa matiek z tabuľky 'queen_breeders'
+        'matka_id', // ID matky z tabuľky 'queens'
+        'matka_trudov',
+        'datum_narodenia',
+        'datum_inseminacie',
+        'imbreeding',
+        'oznacenie_matky',
+        'kladie_od',
+        'sposob_oplodnenia',
+        'chovny_ul',
+        'poznamka',
+        'CEHZ',
+        'skratka_chovu ',
+        'rok',
+
     ];
     /**
      * Relácia: Matka patrí k jednému Chovateľovi Matiek (QueenBreeder).

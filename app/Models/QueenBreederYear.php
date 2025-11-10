@@ -14,11 +14,9 @@ class QueenBreederYear extends Model
     protected $table = 'queen_breeder_years';
     protected $fillable = [
         'chovatel_matiek_id',
-        'rok',
         'datum_povolenia_RVPS',
         'cislo_dekretu',
         'typ_chovu',
-        'skratka_chovu',
         'RVPS',
     ];
 

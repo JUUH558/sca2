@@ -11,6 +11,26 @@ class Rating extends Model
 
     // Pôvodná tabuľka: hodnotenie
     protected $table = 'ratings';
+
+    protected $fillable = [
+        'skratka_chovu',
+        'zapisane',
+        'matka',
+        'skratka_chovu',
+        'hodnotil',
+        'med',
+        'hygienicky_test',
+        'varroa',
+        'miernost',
+        'rozbiehavost',
+        'rojivost',
+        'stavba_ms',
+        'zimovanie_pocet_uliciek',
+        'nozema',
+        'poznamka',
+        'zasoby',
+    ];
+
     protected $guarded = [];
 
     public $timestamps = false;

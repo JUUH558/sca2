@@ -21,8 +21,13 @@ class Serie extends Model
         'datum_zalozenia_serie', // Dátum založenia série
         'mama_matky', // Mama matky
         'otec_matky', // Otec matky
-        'CEHZ','rok',
-        'linia','prelarvovane','prijate','zavieckovane','vyliahnute','oplodnene','predane',
+        'linia',
+        'prelarvovane',
+        'prijate',
+        'zavieckovane',
+        'vyliahnute',
+        'oplodnene',
+        'predane',
     ];
     // public $timestamps = false;
 
