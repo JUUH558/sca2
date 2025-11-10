@@ -50,7 +50,7 @@ class RatingResource extends Resource
             'edit' => EditRating::route('/{record}/edit'),
         ];
     }
-        // KĽÚČOVÁ ZMENA: Filtrovanie záznamov pre zoznam
+    // KĽÚČOVÁ ZMENA: Filtrovanie záznamov pre zoznam
     // Táto metóda definuje, aké záznamy sa vôbec zobrazia v zozname.
     public static function getEloquentQuery(): Builder
     {
@@ -71,11 +71,24 @@ class RatingResource extends Resource
             // 3. Aplikovanie podmienky filtrovania
             // Filtrujeme, aby 'skratka_chovu' bola rovná menu prihláseného užívateľa
             return $query
-            ->where('skratka_chovu', $skratka_chovu);
+                ->where('skratka_chovu', $skratka_chovu);
         }
 
         // Ak nie je prihlásený, nezobrazujeme žiadne záznamy (alebo sa Filament postará o redirect)
         return $query->whereRaw('1 = 0');
     }
+    public static function getModelLabel(): string
+    {
+        return 'Hodnotenie matiek';
+    }
 
+    public static function getPluralModelLabel(): string
+    {
+        return 'Hodnotenie matiek';
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'Hodnotenie matiek';
+    }
 }
