@@ -91,7 +91,7 @@ class OrderResource extends Resource
     // preklad názvov tabuliek
     public static function getModelLabel(): string
     {
-        return 'Objednávky';
+        return 'Objednávku';
     }
 
     public static function getPluralModelLabel(): string

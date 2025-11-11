@@ -38,6 +38,8 @@ class Order extends Model
         'pocet_dodanych',
         'sposob_odberu',
         'poznamka',
+        'rok',
+        'id_zakaznika',
         // Pridajte ďalšie polia podľa potreby
     ];
     protected $guarded = [];
