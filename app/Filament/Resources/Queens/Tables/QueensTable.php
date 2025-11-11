@@ -144,7 +144,9 @@ class QueensTable
 
                     // NOVÝ KÓD: Vlastná hromadná akcia pre úpravu
                     BulkAction::make('hromadna_uprava')
-                        ->label('Hromadná úprava')
+                        ->label('Hromadná úprava matiek')
+                        ->icon('heroicon-o-pencil-square')
+                        ->color('primary')
                         // Definujte polia pre hromadnú úpravu
                         ->schema([
                             // Príklad: Úprava spôsobu oplodnenia
@@ -253,7 +255,7 @@ class QueensTable
                         })
                         ->deselectRecordsAfterCompletion(), // Zruší výber po akcii
 
-                    DeleteBulkAction::make(),
+                    //DeleteBulkAction::make(),
                 ]),
 
             ]);
