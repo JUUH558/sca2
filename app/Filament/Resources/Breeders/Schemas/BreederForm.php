@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Breeders\Schemas;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Facades\Auth;
+use Filament\Forms\Components\Textarea;
 
 class BreederForm
 {
@@ -33,8 +34,9 @@ class BreederForm
                     ->label('Telefón')
                     ->tel(),
                 TextInput::make('mail')->email(),
-                TextInput::make('poznamka')
-                    ->label('Poznámka'),
+                Textarea::make('poznamka')
+                    ->label('Poznámka')
+                    ->columnSpanFull(),
                 TextInput::make('sposob_odberu_matiek')
                     ->label('Spôsob odberu matiek')
                     ->numeric(),

@@ -20,6 +20,7 @@ class InseminatorForm
                     ->required(),
                 TextInput::make('mail'),
                 TextInput::make('telefon')
+                ->label('Telefón')
                     ->tel(),
             ]);
     }

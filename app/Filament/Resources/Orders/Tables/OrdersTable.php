@@ -31,23 +31,28 @@ class OrdersTable
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('datum_objednavky')
+                    ->label('Dátum objednávky')
                     ->date()
                     ->sortable(),
                 TextColumn::make('datum_splnenia')
+                    ->label('Dátum splnenia')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->date()
                     ->sortable(),
                 TextColumn::make('datum_zrusenia')
+                    ->label('Dátum zrušenia')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->date()
                     ->sortable(),
                 TextColumn::make('dovod_zrusenia')
+                    ->label('Dôvod zrušenia')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('linia_matky.meno_line') // Používame názov relácie ('zakaznik') a stĺpec z nej ('meno')
                     ->label('Línia'),
                 TextColumn::make('sposob_oplodnenia')
+                    ->label('Spôsob oplodnenia')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('pocet_objednanych')
@@ -55,6 +60,7 @@ class OrdersTable
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('pocet_dodanych')
+                    ->label('Dodané')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->numeric()
                     ->toggleable(isToggledHiddenByDefault: true)
@@ -63,10 +69,12 @@ class OrdersTable
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('sposob_odberu')
+                    ->label('Spôsob odberu')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('poznamka')
+                    ->label('Poznámka')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('deleted_at')

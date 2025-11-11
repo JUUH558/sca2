@@ -43,12 +43,12 @@ class BreedersTable
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('psc')
-                ->label('PSČ')
+                    ->label('PSČ')
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('telefon')
-                -> label('Telefón')
+                    ->label('Telefón')
                     ->searchable()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -56,11 +56,11 @@ class BreedersTable
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('poznamka')
-                ->label('Poznámka')
+                    ->label('Poznámka')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('sposob_odberu_matiek')
-                ->label('Spôsob odberu matiek')
+                    ->label('Spôsob odberu matiek')
                     ->numeric()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -80,16 +80,18 @@ class BreedersTable
             ->recordActions([
                 // EditAction::make(),
                 EditAction::make()
-                   // KĽÚČOVÁ ZMENA: PRIDANIE EditAction $action ako druhého argumentu
-                    ->url(fn ($record, EditAction $action) => BreederResource::getUrl('edit', [
-                        'record' => $record,
-                        // Spoľahlivo získa číslo aktuálnej stránky z komponentu tabuľky
-                        'page' => $action->getLivewire()->getTablePage(),
-                    ])
+                    // KĽÚČOVÁ ZMENA: PRIDANIE EditAction $action ako druhého argumentu
+                    ->url(
+                        fn($record, EditAction $action) => BreederResource::getUrl('edit', [
+                            'record' => $record,
+                            // Spoľahlivo získa číslo aktuálnej stránky z komponentu tabuľky
+                            'page' => $action->getLivewire()->getTablePage(),
+                        ])
                     ),
                 DeleteAction::make(),
                 ForceDeleteAction::make(),
-                RestoreAction::make(),           ])
+                RestoreAction::make(),
+            ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

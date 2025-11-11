@@ -22,7 +22,7 @@ class QueenForm
         // Predpokladáme, že 'evidencne_cislo' a 'mama_matky' sú stĺpce v PedigreeQueen
         $concatenatedLabelSerie = DB::raw("CONCAT(seria, ' - ', mama_matky, ' - ',otec_matky)");
         $concatenatedLabelInseminator = DB::raw("CONCAT(titul, ' ',meno, ' ', priezvisko)");
-        $concatenatedLabelBreeder = DB::raw("CONCAT(meno, ' - ', priezvisko, ' - ',mesto)");
+        $concatenatedLabelBreeder = DB::raw("CONCAT(meno, ' ', priezvisko, ', ', mesto,', ', adresa)");
 
         return $schema
             ->components([
@@ -36,7 +36,7 @@ class QueenForm
  */
 
                 // Select komponent pre výber Série
-                Select::make('seria_select_id') // Pole pre výber ID Plemennej matky (zobrazuje sa)
+                Select::make('seria') // Pole pre výber ID Plemennej matky (zobrazuje sa)
                     ->label('Seria číslo - mama matky - otec matky') // Používateľsky čitateľný názov
                     ->live() // Kľúčové: Spustí aktualizáciu pri zmene hodnoty
                     ->options(
@@ -104,7 +104,7 @@ class QueenForm
                     ->label('Dátum inseminácie'),
                 //TextInput::make('inseminoval'),
                 // Select komponent pre výber Série
-                Select::make('inseminoval_select_id') // Pole pre výber ID Plemennej matky (zobrazuje sa)
+                Select::make('inseminoval') // Pole pre výber ID Plemennej matky (zobrazuje sa)
                     ->label('Inseminoval') // Používateľsky čitateľný názov
                     ->live() // Kľúčové: Spustí aktualizáciu pri zmene hodnoty
                     ->options(
@@ -159,14 +159,15 @@ class QueenForm
                     ->label('Dátum expedície'),
                 TextInput::make('chovny_ul')
                     ->label('Chovný úľ'),
-                TextInput::make('poznamka')
-                    ->label('Poznámka'),
+                Textarea::make('poznamka')
+                    ->label('Poznámka')
+                    ->columnSpanFull(),
                 //TextInput::make('chovatel_id')
                 //    ->label('Chovateľ - zákazník')
                 //    ->numeric(),
                 // Select komponent pre výber Breeders
-                Select::make('breeder_select_id') // Pole pre výber ID Plemennej matky (zobrazuje sa)
-                    ->label('Meno priezvisko, bydlisko') // Používateľsky čitateľný názov
+                Select::make('chovatel_id') // Pole pre výber ID Plemennej matky (zobrazuje sa)
+                    ->label('Meno, priezvisko a bydlisko zákazníka') // Používateľsky čitateľný názov
                     ->live() // Kľúčové: Spustí aktualizáciu pri zmene hodnoty
                     ->options(
                         // Filtrovanie dopytu na model PedigreeQueen
@@ -177,7 +178,7 @@ class QueenForm
                             ->pluck($concatenatedLabelBreeder, 'id')
                             ->toArray()
                     )
-                    ->afterStateUpdated(function (?string $state, callable $set) {
+                    /*                     ->afterStateUpdated(function (?string $state, callable $set) {
                         // Kľúčové: Funkcia sa spustí po výbere hodnoty
                         if ($state) {
                             // 1. Nájdeme vybranú Plemennú Matku
@@ -191,13 +192,14 @@ class QueenForm
                             $set('zakaznik', null);
                         }
                     })
+ */
                     ->searchable()
                     ->required(),
 
-                Textarea::make('zakaznik')
+                /*                 Textarea::make('zakaznik')
                     ->label('Zákazník')
                     ->disabled(),
-
+ */
                 /*                TextInput::make('CEHZ')
                     ->required(),
                 TextInput::make('skratka_chovu')

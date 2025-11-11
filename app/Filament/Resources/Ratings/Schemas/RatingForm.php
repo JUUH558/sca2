@@ -15,6 +15,7 @@ class RatingForm
         return $schema
             ->components([
                 DateTimePicker::make('zapisane')
+                ->label('Dátum a čas zápisu')
                     ->required(),
                 TextInput::make('hodnotil')
                     ->required()

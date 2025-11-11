@@ -22,6 +22,7 @@ class SerieForm
         return $schema
             ->components([
                 TextInput::make('seria')
+                ->label('Séria')
                     ->readonly()
                     ->placeholder('Automaticky doplnené po uložení')
 
@@ -71,7 +72,7 @@ class SerieForm
 
                 // ZMENA 2: Nové read-only pole na zobrazenie Matky vybranej matky
                 TextInput::make('mama_matky') // Toto pole zobrazuje Matku vybranej Plemennej Matky
-                    ->label('Matka vybranej plemennej matky (CEHZ)') // Nový label
+                    ->label('Matka vybranej plemennej matky ') // Nový label
                     ->placeholder('Automaticky doplnené po výbere Plemennej matky')
                     ->readonly() // Pole je len na zobrazenie
                     // ->dehydrated(false) // Hodnota sa neuloží do modelu Serie (len zobrazenie)
@@ -79,32 +80,41 @@ class SerieForm
 
                 // ZMENA 3: TextInput pre otca, teraz dynamicky plnený
                 TextInput::make('otec_matky')
-                    ->label('Otec vybranej plemennej matky (CEHZ)')
+                    ->label('Otec vybranej plemennej matky ')
                     ->placeholder('Automaticky doplnené po výbere Plemennej matky')
                     ->readonly(), // Pole je len na zobrazenie
                 // ->dehydrated(false), // Hodnota sa neuloží do modelu Serie (len zobrazenie)
 
                 DatePicker::make('datum_zalozenia_serie')
+                ->label('Dátum založenia série')
                     ->required(),
-                DatePicker::make('datum_liahnutia_matiek'),
+                DatePicker::make('datum_liahnutia_matiek')
+                ->label('Dátum liahnutia matiek'),
                 TextInput::make('linia')
+                ->label('Línia')
                     ->readonly(),
                 TextInput::make('prelarvovane')
+                        ->label('Počet prelarvovaných')
                     ->numeric()
                     ->default(0),
                 TextInput::make('prijate')
+                    ->label('Počet prijatých')
                     ->numeric()
                     ->default(0),
                 TextInput::make('zavieckovane')
+                    ->label('Počet zaviečkovaných')
                     ->numeric()
                     ->default(0),
                 TextInput::make('vyliahnute')
+                    ->label('Počet vyliahnutých')
                     ->numeric()
                     ->default(0),
                 TextInput::make('oplodnene')
+                    ->label('Počet oplodnených')
                     ->numeric()
                     ->default(0),
                 TextInput::make('predane')
+                    ->label('Počet predaných')
                     ->numeric()
                     ->default(0),
             ]);

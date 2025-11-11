@@ -28,6 +28,7 @@ class QueensTable
                 TextColumn::make('otec_matky')
                     ->searchable(),
                 TextColumn::make('matka_trudov')
+                    ->label('Matka trúdov')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('datum_narodenia')

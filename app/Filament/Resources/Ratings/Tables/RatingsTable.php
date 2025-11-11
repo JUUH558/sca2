@@ -28,6 +28,7 @@ class RatingsTable
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('datum')
+                    ->label('Dátum hodnotenia')
                     ->date()
                     ->sortable(),
                 TextColumn::make('matka')
@@ -44,8 +45,9 @@ class RatingsTable
                     ->sortable() // POZOR: radenie bude fungovať len pri použití Filament v2.x Query Builder
                     ->numeric(decimalPlaces: 2)
                     ->color('success'),
-                    //->description('Priemer všetkých hodnotených vlastností'),
+                //->description('Priemer všetkých hodnotených vlastností'),
                 TextColumn::make('hygienicky_test')
+                    ->label('Hygienický test')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->numeric()
                     ->sortable(),
@@ -54,14 +56,17 @@ class RatingsTable
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('miernost')
+                    ->label('Miernosť')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('rozbiehavost')
+                    ->label('Rozbiehavosť')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('rojivost')
+                    ->label('Rojivosť')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->numeric()
                     ->sortable(),
@@ -70,14 +75,17 @@ class RatingsTable
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('zimovanie_pocet_uliciek')
+                    ->label('Zimovanie (počet uličiek)')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('nozema')
+                    ->label('Nózema')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('zasoby')
+                    ->label('Zásoby')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->numeric()
                     ->sortable(),

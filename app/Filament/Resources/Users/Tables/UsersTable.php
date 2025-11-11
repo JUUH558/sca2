@@ -37,6 +37,7 @@ class UsersTable
 
                     ->searchable(),
                 TextColumn::make('opravnenie')
+                ->label('Oprávnenie')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('adresa')
@@ -46,9 +47,11 @@ class UsersTable
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('PSC')
+                ->label('PSČ')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('telefon')
+                ->label('Telefón')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('link_na_med')
