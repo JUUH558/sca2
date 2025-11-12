@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Auth;
 
 class BreederResource extends Resource
 {
+
     protected static ?string $model = Breeder::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
@@ -98,8 +99,6 @@ class BreederResource extends Resource
         return 'Chovatelia';
     }
 
-    public static function getNavigationLabel(): string
-    {
-        return 'Chovatelia';
-    }
+
 }
+
