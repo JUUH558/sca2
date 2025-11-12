@@ -45,7 +45,8 @@ class QueensTable
  */
                 TextColumn::make('evidencne_cislo')
                     ->label('Evidenčné číslo')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('mama_matky')
                     ->searchable(),
                 TextColumn::make('otec_matky')
