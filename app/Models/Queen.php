@@ -84,5 +84,26 @@ class Queen extends Model
     {
         return $this->belongsTo(Breeder::class, 'inseminoval', 'id');
     }
+    /**
+     * Vzťah (Relationship) k záznamu v ratings.
+     * Predpokladáme, že sa spája cez 'evidencne_cislo'.
+     */
+        public function rating()
+    {
+        // Spojenie Queen.evidencne_cislo s Rating.matka
+        return $this->hasOne(Rating::class, 'matka', 'evidencne_cislo');
+    }
+
+    /**
+     * Computed Attribute: Kontroluje, či existuje záznam o hodnotení (pedigree_queens).
+     * Bude sa volať v Table Column ako 'is_hodnotena'.
+     */
+    public function getIsHodnotenaAttribute(): bool
+    {
+        // Používame vzťah a metódu exists() na zistenie, či existuje súvisiaci záznam.
+        // Tým sa minimalizujú databázové dotazy.
+        return $this->rating()->exists();
+    }
+
 }
     // Ďalšie relácie by tu mali byť definované, napr. s hodnotením (Rating)
