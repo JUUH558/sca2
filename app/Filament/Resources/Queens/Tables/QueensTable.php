@@ -22,6 +22,10 @@ use App\Models\Serie;
 use App\Models\Breeder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Inseminator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+
 
 class QueensTable
 {
@@ -41,10 +45,12 @@ class QueensTable
  */
                 TextColumn::make('evidencne_cislo')
                     ->label('Evidenčné číslo')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('mama_matky')
                     ->searchable(),
                 TextColumn::make('otec_matky')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('matka_trudov')
                     ->label('Matka trúdov')
@@ -54,6 +60,9 @@ class QueensTable
                     ->label('Dátum narodenia')
                     ->date('d.m.Y')
                     ->sortable(),
+                IconColumn::make('is_hodnotena')
+                    ->label('Hodnotená')
+                    ->boolean(),
                 TextColumn::make('datum_inseminacie')
                     ->label('Dátum inseminácie')
                     ->toggleable(isToggledHiddenByDefault: true)
@@ -68,9 +77,11 @@ class QueensTable
                     ->searchable(),
                 TextColumn::make('linia')
                     ->label('Línia')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('oznacenie_matky')
                     ->label('Označenie')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('kladie_od')
                     ->toggleable(isToggledHiddenByDefault: true)
@@ -91,8 +102,25 @@ class QueensTable
                     ->sortable(),
                 TextColumn::make('seria')
                     ->label('Séria')
-                    ->numeric()
-                    ->sortable(),
+                    ->numeric(),
+                // NOVÝ, OPRAVENÝ STĹPEC PRE ZÁKAZNÍKA (BREEDER)
+                TextColumn::make('breeder_full_name') // Fiktívny názov stĺpca
+                    ->label('Zákazník')
+                    ->sortable(false) // Vypnuté triedenie, lebo je to zložený stĺpec
+                    // KĽÚČOVÁ FUNKCIA: Spojí meno a priezvisko z relácie 'breeder'
+                    ->getStateUsing(function (Model $record): string {
+                        if ($record->breeder) {
+                            return $record->breeder->meno . ' ' . $record->breeder->priezvisko;
+                        }
+                        return 'Neznámy chovateľ';
+                    })
+                    // Umožní vyhľadávanie podľa mena ALEBO priezviska
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query->whereHas('breeder', function (Builder $subQuery) use ($search) {
+                            $subQuery->where('meno', 'like', "%{$search}%")
+                                ->orWhere('priezvisko', 'like', "%{$search}%");
+                        });
+                    }),
                 TextColumn::make('chovny_ul')
                     ->label('Chovný úľ')
                     ->toggleable(isToggledHiddenByDefault: true)
@@ -231,11 +259,15 @@ class QueensTable
                         ])
                         // Logika, ktorá sa vykoná
                         /**
-                         * @param \Illuminate\Database\Eloquent\Collection|\App\Models\Queen[] $records
+                         * @param \Illuminate\Database\Eloquent\Collection|\App\Models\Queen[] $record
                          * @param array<string,mixed> $data
                          */
                         ->action(function (Collection $records, array $data) {
-                            foreach ($records as /** @var Queen */ $record) {
+                            foreach (
+                                $records as
+                                /** @var Queen */
+                                $record
+                            ) {
                                 $updates = [];
                                 foreach ($data as $key => $value) {
                                     // Aktualizujeme len tie stĺpce, kde bola zadaná nová hodnota
