@@ -101,10 +101,12 @@ class QueenForm
                     ])
                     ->required(),
                 DatePicker::make('datum_inseminacie')
+                    ->requiredIf('sposob_oplodnenia', 'ins')
                     ->label('Dátum inseminácie'),
                 //TextInput::make('inseminoval'),
                 // Select komponent pre výber Série
                 Select::make('inseminoval') // Pole pre výber ID Plemennej matky (zobrazuje sa)
+                    ->requiredIf('sposob_oplodnenia', 'ins')
                     ->label('Inseminoval') // Používateľsky čitateľný názov
                     ->live() // Kľúčové: Spustí aktualizáciu pri zmene hodnoty
                     ->options(
@@ -141,13 +143,13 @@ class QueenForm
                             //$set('linia', null);
                         }
                     })
-                    ->searchable()
-                    ->required(),
+                    ->searchable(),
 
 
 
 
                 TextInput::make('imbreeding')
+                    ->requiredIf('sposob_oplodnenia', 'ins')
                     ->label('Inbreeding'),
                 TextInput::make('linia')
                     ->readonly()
