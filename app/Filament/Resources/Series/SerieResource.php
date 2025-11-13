@@ -16,10 +16,29 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
+use UnitEnum;
 
 class SerieResource extends Resource
 {
     protected static ?string $model = Serie::class;
+    protected static string | UnitEnum | null $navigationGroup = 'Matky';
+    protected static ?int $navigationSort = 5;
+    public static function getNavigationBadge(): ?string
+    {
+        //return static::getModel()::count()->where('skratka_chovu', Auth::user()->skratka_chovu)->where('rok', date('y'));
+        // OPRAVENÝ KÓD:
+        // 1. Získaj model.
+        // 2. Aplikuj filtre (where).
+        // 3. Spočítaj výsledok (count()).
+
+        $count = static::getModel()::query()
+            ->where('skratka_chovu', Auth::user()->skratka_chovu)
+            ->where('rok', date('Y'))
+            ->count();
+
+        return $count > 0 ? (string) $count : null;
+
+    }
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 

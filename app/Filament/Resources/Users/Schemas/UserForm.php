@@ -6,6 +6,7 @@ use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Facades\Auth;
 
 class UserForm
 {
@@ -49,8 +50,12 @@ class UserForm
                     ->label('Oprávnenie')
                     ->required()
                     ->numeric()
+                    ->disabled(function (): bool {
+                        $userPermission = Auth::user() ? (int) Auth::user()->opravnenie : 0;
+                        return $userPermission < 9;
+                    })
                     ->default(0),
-            /*                Textarea::make('two_factor_secret')
+                /*                Textarea::make('two_factor_secret')
                     ->columnSpanFull(),
                 Textarea::make('two_factor_recovery_codes')
                     ->columnSpanFull(),
@@ -58,6 +63,7 @@ class UserForm
                 DateTimePicker::make('two_factor_confirmed_at'),
                 //TextInput::make('podpis'),
                 DateTimePicker::make('reset_token_expire_at'),
- */]);
+ */
+            ]);
     }
 }

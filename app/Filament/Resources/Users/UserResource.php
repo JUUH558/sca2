@@ -16,14 +16,21 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
+use UnitEnum;
+
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
+    protected static string | UnitEnum | null $navigationGroup = 'Chovatelia';
+    protected static ?int $navigationSort = 1;
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::User;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-
-    protected static ?string $recordTitleAttribute = 'User';
+    protected static ?string $recordTitleAttribute = 'Users';
     protected static bool $hasTitleCaseModelLabel = false;
 
     public static function form(Schema $schema): Schema
@@ -81,9 +88,30 @@ class UserResource extends Resource
     {
         return [
             'index' => ListUsers::route('/'),
-            'create' => CreateUser::route('/create'),
             'edit' => EditUser::route('/{record}/edit'),
+            'create' => CreateUser::route('/create'),
         ];
+    }
+
+    /*         return [
+            'index' => ListUsers::route('/'),
+            'edit' => EditUser::route('/{record}/edit'),
+            'create' => CreateUser::route('/create'),
+         ];
+ */
+    // Ak opravnenie používateľa je 9 alebo vyššie, pridáme stránku na vytváranie používateľov
+    /*         $opravnenie = Auth::user() ? (int) Auth::user()->opravnenie : 0;
+        if ($opravnenie >= 9) {
+            $pages=['create' => CreateUser::route('/create')] ;
+        }
+        return $pages;
+ */
+    public static function canCreate(): bool
+    {
+        // Len používatelia s oprávnením 9 a vyšším môžu vytvárať nové matky.
+        $userPermission = Auth::user() ? (int) Auth::user()->opravnenie : 0;
+
+        return $userPermission >= 9;
     }
 
 

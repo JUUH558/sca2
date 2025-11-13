@@ -16,10 +16,28 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
+use UnitEnum;
 
 class RatingResource extends Resource
 {
     protected static ?string $model = Rating::class;
+    protected static string | UnitEnum | null $navigationGroup = 'Matky';
+    protected static ?int $navigationSort = 3;
+    public static function getNavigationBadge(): ?string
+    {
+        //return static::getModel()::count()->where('skratka_chovu', Auth::user()->skratka_chovu)->where('rok', date('y'));
+        // OPRAVENÝ KÓD:
+        // 1. Získaj model.
+        // 2. Aplikuj filtre (where).
+        // 3. Spočítaj výsledok (count()).
+
+        $count = static::getModel()::query()
+            ->where('skratka_chovu', Auth::user()->skratka_chovu)
+            ->count();
+
+        return $count > 0 ? (string) $count : null;
+
+    }
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
@@ -80,16 +98,16 @@ class RatingResource extends Resource
     }
     public static function getModelLabel(): string
     {
-        return 'Hodnotenie matiek';
+        return 'Hodnotené matky';
     }
 
     public static function getPluralModelLabel(): string
     {
-        return 'Hodnotenie matiek';
+        return 'Hodnotené matky';
     }
 
     public static function getNavigationLabel(): string
     {
-        return 'Hodnotenie matiek';
+        return 'Hodnotené matky';
     }
 }

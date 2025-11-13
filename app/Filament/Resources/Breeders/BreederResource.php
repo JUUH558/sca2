@@ -16,6 +16,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
+use UnitEnum;
 
 // use App\Filament\Resources\Breeders\Builder;
 
@@ -23,8 +24,25 @@ class BreederResource extends Resource
 {
 
     protected static ?string $model = Breeder::class;
+    protected static string | UnitEnum | null $navigationGroup = 'Chovatelia';
+    protected static ?int $navigationSort = 2;
+    public static function getNavigationBadge(): ?string
+    {
+        //return static::getModel()::count()->where('skratka_chovu', Auth::user()->skratka_chovu)->where('rok', date('y'));
+        // OPRAVENÝ KÓD:
+        // 1. Získaj model.
+        // 2. Aplikuj filtre (where).
+        // 3. Spočítaj výsledok (count()).
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+        $count = static::getModel()::query()
+            ->where('skratka_chovu', Auth::user()->skratka_chovu)
+            ->count();
+
+        return $count > 0 ? (string) $count : null;
+
+    }
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::Users;
 
     protected static ?string $recordTitleAttribute = 'Chovatelia';
 

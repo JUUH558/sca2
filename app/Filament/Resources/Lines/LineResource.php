@@ -15,12 +15,30 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class LineResource extends Resource
 {
     protected static ?string $model = Line::class;
-
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    public static function canViewAny(): bool
+    {
+        // Príklad 1: Iba ak má používateľ stĺpec 'is_admin' nastavený na true (alebo 1)
+        // return Auth::user()->is_admin;
+
+        // Príklad 2: Iba ak má používateľ stĺpec 'opravnenie' rovný 'chovatel'
+        // return Auth::user()->opravnenie === 'chovatel';
+
+        // Príklad 3: Použitie Laravel Policy (Odporúčané, ak ho máte)
+        // return Auth::user()->can('viewAny', static::getModel());
+
+        // Zvoľte príklad 2, ktorý je pravdepodobne najbližší vašej implementácii
+        return Auth::user() && Auth::user()->opravnenie === 9; // Predpoklad, že 'guest' nemá vidieť
+    }
 
     protected static ?string $recordTitleAttribute = 'Línie';
 
@@ -57,7 +75,7 @@ class LineResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
-        // preklad názvov tabuliek
+    // preklad názvov tabuliek
     public static function getModelLabel(): string
     {
         return 'Línia';
@@ -72,5 +90,4 @@ class LineResource extends Resource
     {
         return 'Línie';
     }
-
 }

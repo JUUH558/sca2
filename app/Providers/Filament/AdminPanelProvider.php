@@ -18,6 +18,9 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Navigation\NavigationItem;
+
+
 
 
 class AdminPanelProvider extends PanelProvider
@@ -47,6 +50,23 @@ class AdminPanelProvider extends PanelProvider
                 AccountWidget::class,
                 //FilamentInfoWidget::class,
             ])
+            ->navigationItems([
+                NavigationItem::make('Analytics')
+                    ->url('https://filament.pirsch.io', shouldOpenInNewTab: true)
+                    ->icon('heroicon-o-presentation-chart-line')
+                    ->group('Reports')
+                    ->sort(3),
+                NavigationItem::make('Zostavy')
+                    ->url(fn(): string => Dashboard::getUrl())
+                    ->icon('heroicon-o-chart-bar-square')
+                    ->group('Reports')
+                    ->sort(3),
+                NavigationItem::make('dashboard')
+                    ->label(fn(): string => __('filament-panels::pages/dashboard.title'))
+                    ->url(fn(): string => Dashboard::getUrl()),
+                //->isActiveWhen(fn () => original_request()->routeIs('filament.admin.pages.dashboard')),
+            ])
+
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

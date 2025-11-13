@@ -16,10 +16,13 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
+use UnitEnum;
 
 class QueenBreederYearResource extends Resource
 {
     protected static ?string $model = QueenBreederYear::class;
+    protected static string | UnitEnum | null $navigationGroup = 'Chovatelia';
+    protected static ?int $navigationSort = 2;
     protected static bool $hasTitleCaseModelLabel = false;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;

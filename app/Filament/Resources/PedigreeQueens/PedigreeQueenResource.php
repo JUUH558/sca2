@@ -16,13 +16,40 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
+use UnitEnum;
 
 class PedigreeQueenResource extends Resource
 {
     protected static ?string $model = PedigreeQueen::class;
-
+    protected static string | UnitEnum | null $navigationGroup = 'Matky';
+    protected static ?int $navigationSort = 2;
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
     protected static bool $hasTitleCaseModelLabel = false;
+/* */
+    public static function getNavigationBadge(): ?string
+    {
+        $baseQuery = static::getModel()::query()
+            ->where('skratka_chovu', Auth::user()->skratka_chovu);
+
+        // 1. Získa celkový počet záznamov
+        $totalCount = $baseQuery->count();
+
+        if ($totalCount === 0) {
+            // Ak nie sú žiadne záznamy, nezobrazí odznak
+            return null;
+        }
+
+        // 2. Získa počet ŽIVÝCH matiek
+        // Musíme spustiť nový dotaz, aby sme mohli pridať ďalší filter.
+        // Predpokladáme, že 'matka_zije' je 1 (TRUE/ŽIJE) alebo 0 (FALSE/NEŽIJE).
+        $liveCount = static::getModel()::query()
+            ->where('skratka_chovu', Auth::user()->skratka_chovu)
+            ->where('matka_zije', 1)
+            ->count();
+
+        // 3. Vráti formát "Živé / Všetky"
+        return "{$liveCount} / {$totalCount}";
+    }
 
     protected static ?string $recordTitleAttribute = 'Plemenné matky';
 
