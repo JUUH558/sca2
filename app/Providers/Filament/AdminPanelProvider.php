@@ -19,6 +19,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Navigation\NavigationItem;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -83,6 +84,8 @@ class AdminPanelProvider extends PanelProvider
             //->resourceEditPageRedirect('index')
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+                \Illuminate\Auth\Middleware\Authorize::class . ':access-filament',
+            ])
+        ;
     }
 }
